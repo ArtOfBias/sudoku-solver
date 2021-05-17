@@ -40,7 +40,7 @@ def testSafe(board: List[List[int]], row: int, col: int, num: int) -> bool:
 
 
 def findEmpty(board: List[List[int]], pos: List[int]) -> bool:
-    """finds the first empty (0) square, searches left-to-right, up-to-down"""
+    """finds the first empty (0) square, searches left-to-right, up-to-down, modifies pos in the process"""
     for i in range(9):
         for j in range(9):
             if(board[i][j] == 0):
