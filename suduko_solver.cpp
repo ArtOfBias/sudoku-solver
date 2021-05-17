@@ -11,5 +11,5 @@ bool findEmpty(intArr board, vector<int>);
 bool solve(intArr board);
 
 int main(){
-    return 0
+    return 0;
 }
