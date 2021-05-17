@@ -1,11 +1,16 @@
-def printBoard(board):
+from typing import List, NoReturn
+
+
+def printBoard(board: List[List[int]]) -> NoReturn:
+    """outputs the board in plaintext"""
     for row in range(9):
         for col in range(9):
             print(board[row][col], end=" ")
         print()
 
 
-def checkBoard(board) -> bool:
+def checkBoard(board: List[List[int]]) -> bool:
+    """checks wether the current entire board is valid"""
     for row in range(9):
         for col in range(9):
             if testSafe(board, row, col, board[row][col]) == False:
@@ -13,7 +18,8 @@ def checkBoard(board) -> bool:
     return True
 
 
-def testSafe(board, row: int, col: int, num: int) -> bool:
+def testSafe(board: List[List[int]], row: int, col: int, num: int) -> bool:
+    """checks wether placing num at (row, col) is valid"""
     testBoard = board[:]
     testBoard[row][col] = num
 
@@ -33,28 +39,28 @@ def testSafe(board, row: int, col: int, num: int) -> bool:
     return True
 
 
-def findEmpty(board, l):
+def findEmpty(board: List[List[int]], pos: List[int]) -> bool:
+    """finds the first empty (0) square, searches left-to-right, up-to-down"""
     for i in range(9):
         for j in range(9):
             if(board[i][j] == 0):
-                l[0] = i
-                l[1] = j
+                pos[0] = i
+                pos[1] = j
                 return True
     return False
 
 
-def solve(board):
-    """main function to solve the board, stores the solved board in solvedBoard"""
+def solve(board: List[List[int]]) -> bool:
+    """returns true or false depending on whether the board is solvable, modifies the board in the process"""
     if not checkBoard(board):
-        print("board invalid")
         return False
     
-    l = [0,0]
-    if not findEmpty(board, l):
+    pos = [0,0]
+    if not findEmpty(board, pos):
         return True
 
-    row = l[0]
-    col = l[1]
+    row = pos[0]
+    col = pos[1]
 
     for num in range(1,10):
         if testSafe(board, row, col, num):
@@ -65,32 +71,3 @@ def solve(board):
         board[row][col] = 0
     
     return False
-
-
-"""
-grid = [[3, 0, 6, 5, 0, 8, 4, 0, 0],
-       [5, 2, 0, 0, 0, 0, 0, 0, 0],
-       [0, 8, 7, 0, 0, 0, 0, 3, 1],
-       [0, 0, 3, 0, 1, 0, 0, 8, 0],
-       [9, 0, 0, 8, 6, 3, 0, 0, 5],
-       [0, 5, 0, 0, 9, 0, 6, 0, 0],
-       [1, 3, 0, 0, 0, 0, 2, 5, 0],
-       [0, 0, 0, 0, 0, 0, 0, 7, 4],
-       [0, 0, 5, 2, 0, 6, 3, 0, 0]]
-"""
-
-
-grid = [[0, 9, 0, 2, 0, 3, 0, 4, 0],
-        [4, 0, 7, 0, 9, 0, 8, 0, 2],
-        [0, 1, 0, 0, 0, 0, 0, 9, 0],
-        [3, 0, 0, 6, 0, 5, 0, 0, 9],
-        [0, 4, 0, 0, 1, 0, 0, 2, 0],
-        [5, 0, 0, 9, 0, 4, 0, 0, 3],
-        [0, 2, 0, 0, 0, 0, 0, 8, 0],
-        [1, 0, 3, 0, 6, 0, 2, 0, 4],
-        [0, 6, 0, 4, 0, 2, 0, 3, 0]]
-
-
-solve(grid)
-
-printBoard(grid)
