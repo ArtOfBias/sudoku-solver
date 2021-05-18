@@ -4,9 +4,9 @@ using namespace std;
 
 typedef vector<vector<int>> intArr;
 
-void printBoard(intArr board);
+void print_board(intArr board);
 
-bool findEmpty(intArr board, vector<int>);
+bool find_empty(intArr board, vector<int>);
 
 bool solve(intArr board);
 
