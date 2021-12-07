@@ -1,0 +1,3 @@
+# sudoku-solver
+
+I will make a gui for this... one day...
